@@ -76,15 +76,18 @@ def write_pickle(zeno_qc_structure, numOperators, backend = "simulator"):
 def process_circuit(numOpPerStage, noisy=False):
     probabilityArray = []
     circuit = create_circuit(numOpPerStage, theta=pi/2) # Create the circuit with the number of operators and theta value
-    print("Circuit Created")
-    if noisy:
-        print("Noisy Simulator Mode")
-        # Run the circuit on the noisy simulator
-        s1, shots = noisy_simulator(circuit)
-    else:
-        print("Ideal Simulator Mode")
-        # Run the circuit on the ideal simulator
-        s1, shots = ideal_simulator(circuit)
+    # print("Circuit Created")
+
+    s1 = noisy_remote_simulator_2(circuit, "heron_model.pkl")
+    shots = 4096
+    # if noisy:
+    #     print("Noisy Simulator Mode")
+    #     # Run the circuit on the noisy simulator
+    #     s1, shots = noisy_simulator(circuit)
+    # else:
+    #     print("Ideal Simulator Mode")
+    #     # Run the circuit on the ideal simulator
+    #     s1, shots = ideal_simulator(circuit)
     numZero = list(s1.values())[list(s1.keys()).index('0')] # Find the occurence of 0
     p = numZero/shots # Calculate the probability of measuring the zero state
     return s1, circuit, probabilityArray, p
@@ -104,7 +107,7 @@ def zeno_demo_main(numOperators = 4):
 
             # numZero = list(s1.values())[list(s1.keys()).index('0')] # Find the occurence of 0
             # p = numZero/4096
-            print(f"Probability of Zero State is {p}")
+            # print(f"Probability of Zero State is {p}")
             if i < numIter - 1:
                 if p > 0.5: # This means the state has not changed from the 0 state yet.
                     probabilityArray.append(p)

@@ -98,7 +98,7 @@ while running:
                 active_input = False
 
             if simulate_button.collidepoint(event.pos):
-                print("Simulate clicked with input:", user_input)
+                # print("Simulate clicked with input:", user_input)
                 # try:
                 #     zeno_demo_main(numOperators=int(user_input))
                 #     # In the future: draw figure here
