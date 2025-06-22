@@ -33,7 +33,7 @@ from qiskit import transpile
 #     # Return counts sorted by bitstring
 #     return dict(sorted(counts.items(), key=lambda x: int(x[0], 2)))
 
-def noisy_local_simulator(qc):
+def noisy_simulator(qc):
     # Use fake noisy backend
     fake_backend = FakeManilaV2()
     noise_model = NoiseModel.from_backend(fake_backend)
@@ -42,9 +42,9 @@ def noisy_local_simulator(qc):
     # Transpile circuit
     qc_t = transpile(qc, simulator)
     # Run simulation
-    shots = 4096
+    shots = 1024
     # Note: shots is set to 1024, but can be adjusted as needed.
     job = simulator.run(qc_t, shots=shots)
     result = job.result()
     counts = result.get_counts()
-    return dict(sorted(counts.items(), key=lambda x: int(x[0], 2)))
+    return counts, shots
