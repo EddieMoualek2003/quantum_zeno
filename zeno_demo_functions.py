@@ -78,16 +78,8 @@ def process_circuit(numOpPerStage, noisy=False):
     circuit = create_circuit(numOpPerStage, theta=pi/2) # Create the circuit with the number of operators and theta value
     # print("Circuit Created")
 
-    s1 = noisy_remote_simulator_2(circuit, "heron_model.pkl")
-    shots = 4096
-    # if noisy:
-    #     print("Noisy Simulator Mode")
-    #     # Run the circuit on the noisy simulator
-    #     s1, shots = noisy_simulator(circuit)
-    # else:
-    #     print("Ideal Simulator Mode")
-    #     # Run the circuit on the ideal simulator
-    #     s1, shots = ideal_simulator(circuit)
+    # s1 = noisy_remote_simulator_2(circuit, "heron_model.pkl")
+    s1, shots = noisy_local_simulator(circuit)
     numZero = list(s1.values())[list(s1.keys()).index('0')] # Find the occurence of 0
     p = numZero/shots # Calculate the probability of measuring the zero state
     return s1, circuit, probabilityArray, p
