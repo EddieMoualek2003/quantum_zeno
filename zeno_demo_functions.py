@@ -134,7 +134,7 @@ def zeno_demo_main(numOperators = 4):
     ax.set_xlabel("Number of Measurements")
     ax.set_ylabel("Probability of State Change (Time Evolution)")
     ax.set_xlim(0, int(numOperators)+2)
-    ax.set_ylim(0, 1)
+    ax.set_ylim(0, 0.25)
 
     # Save the figure
     backend = "simulator" if simulator else "QC"

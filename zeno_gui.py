@@ -125,4 +125,5 @@ while running:
     clock.tick(30)
 
 pygame.quit()
+os.remove("resource_folder/zeno_probability_plot.png")
 sys.exit()
